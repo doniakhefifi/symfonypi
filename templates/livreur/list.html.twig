@@ -1,0 +1,89 @@
+{% block title %}List Livreur{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        /* Container styles */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Table styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        td {
+            background-color: #fff;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            text-decoration: none;
+            color: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            border: none;
+        }
+
+        .btn-primary:hover, .btn-danger:hover {
+            opacity: 0.8;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>List Livreur</h1>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Livreur Name</th>
+                <th>Contact Number</th>
+                <th>Date</th>
+                <th>Type Vehicule</th>
+                <th>Salaire</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for livreur in tablelivreur %}
+                <tr>
+                    <td>{{ livreur.livreurName }}</td>
+                    <td>{{ livreur.contactNumber }}</td>
+                    <td>{{ livreur.date }}</td>
+                    <td>{{ livreur.typeVehicule }}</td>
+                    <td>{{ livreur.salaire }}</td>
+                    <td>
+                        <a href="{{ path('update_livreur', {'id': livreur.id}) }}" class="btn btn-primary">Update</a>
+                        <a href="{{ path('remove_livreur', {'id': livreur.id}) }}" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <a href="{{ path('add_livreur') }}" class="btn btn-primary">Add Livreur</a>
+    </div>
+{% endblock %}

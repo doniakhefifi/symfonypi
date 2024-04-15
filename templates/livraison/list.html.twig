@@ -1,0 +1,101 @@
+{% block title %}List Livraison{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table th, .table td {
+            padding: 8px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        .table th {
+            background-color: #f2f2f2;
+        }
+
+        .table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .table tr:hover {
+            background-color: #f2f2f2;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 6px 12px;
+            margin-bottom: 0;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.42857143;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            cursor: pointer;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+
+        .btn-primary {
+            color: #fff;
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-danger {
+            color: #fff;
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+
+        .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {
+            color: #fff;
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+        .btn-danger:hover, .btn-danger:focus, .btn-danger:active, .btn-danger.active, .open .dropdown-toggle.btn-danger {
+            color: #fff;
+            background-color: #c82333;
+            border-color: #bd2130;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <h1>List Livraison</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Client Name</th>
+            <th>Delivery Address</th>
+            <th>Delivery Date</th>
+            <th>Status</th>
+            <th>Commande</th>
+            <th>Livreur</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for livraison in tablelivraison %}
+            <tr>
+                <td>{{ livraison.clientName }}</td>
+                <td>{{ livraison.deliveryAdress }}</td>
+                <td>{{ livraison.deliveryDate }}</td>
+                <td>{{ livraison.status }}</td>
+                <td>{{ livraison.commande }}</td>
+                <td>{{ livraison.livreur.livreurName ?? 'N/A' }}</td>
+                <td>
+                    <a href="{{ path('update_livraison', {'id': livraison.id}) }}" class="btn btn-primary">Update</a>
+                    <a href="{{ path('remove_livraison', {'id': livraison.id}) }}" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ path('add_livraison') }}" class="btn btn-primary">Add Livraison</a>
+{% endblock %}
